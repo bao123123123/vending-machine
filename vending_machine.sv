@@ -3,7 +3,7 @@ module vending_machine(
 	input logic 			clk_i,
 	input logic 			nickle_i, dime_i, quarter_i,
 	
-	output logic [2:0] 	change_o,
+	output logic [2:0] 	    change_o,
 	output logic 			soda_o
 );
 
@@ -36,7 +36,7 @@ always_comb begin
 		endcase
 			
 		S10:case ({nickle_i, dime_i, quarter_i})
-			3'b001: 	next <= S0;
+			3'b001:     next <= S0;
 			3'b010: 	next <= S0;
 			3'b100: 	next <= S15;
 			default: next <= S10;
@@ -63,18 +63,18 @@ soda_o =    ((present == S0) && ({nickle_i, dime_i, quarter_i}) == 3'b001) |
 	
 	case (present)
 		S0: case({nickle_i, dime_i, quarter_i})
-				3'b001: 	change_o = 3'b001; // change = 5
+				3'b001:     change_o = 3'b001; // change = 5
 				default: change_o = 3'b000;
 			 endcase	
 			 
 		S5: case({nickle_i, dime_i, quarter_i})
-				3'b001: 	change_o = 3'b010; // change = 10
+				3'b001:     change_o = 3'b010; // change = 10
 				default: change_o = 3'b000;	
 			 endcase
 			 
 		S10: case({nickle_i, dime_i, quarter_i})
-				3'b001:	   change_o = 3'b011; // change = 15
-				3'b010:	   change_o = 3'b000; // change = 0
+				3'b001:	    change_o = 3'b011; // change = 15
+				3'b010:	    change_o = 3'b000; // change = 0
 				default: change_o = 3'b000;
 			  endcase
 			  
